@@ -13,26 +13,44 @@
     <link rel="stylesheet" href="../css/franchisee.css">
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 
 <body>
     <!-- Header -->
     <header class="franchisee-header">
         <div class="logo"><i class="fas fa-store"></i> Mì Cay Đức Hiệu - CN Quận 1</div>
-        <div class="user-menu"><i class="fas fa-user-circle"></i> Nguyễn Văn Anh (Chủ cửa hàng)</div>
+
+        <div class="user-menu" id="userMenu">
+            <i class="fas fa-user-circle"></i>
+            <span>Nguyễn Văn Anh (Chủ cửa hàng)</span>
+
+            <div class="user-dropdown">
+                <a href="profile.html"><i class="fas fa-id-card"></i> Trang cá nhân</a>
+                <a href="change-password.html"><i class="fas fa-key"></i> Đổi mật khẩu</a>
+                <a href="#" class="logout"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+            </div>
+        </div>
     </header>
 
-  <!-- Sidebar -->
-  <aside class="franchisee-sidebar">
-    <ul>
-      <li><a href="dashboard.html" style="color: black; text-decoration: none;"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-      <li class="active"><a href="revenue.html" style="color: black; text-decoration: none;"><i class="fas fa-dollar-sign"></i> Doanh thu</a></li>
-      <li><a href="contract.html" target="_blank" style="color: black; text-decoration: none;"><i class="fas fa-file-contract"></i> Hợp đồng</a></li>
-      <li><a href="promotion.html" style="color: black; text-decoration: none;"><i class="fas fa-tags"></i> Khuyến mãi</a></li>
-      <li><a href="notification.html" style="color: black; text-decoration: none;"><i class="fas fa-bell"></i> Thông báo</a></li>
-    </ul>
-  </aside>
+    <!-- Sidebar -->
+    <aside class="franchisee-sidebar">
+        <ul>
+            <li><a href="dashboard.html" style="color: black; text-decoration: none;"><i
+                        class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li class="active"><a href="revenue.html" style="color: black; text-decoration: none;"><i
+                        class="fas fa-dollar-sign"></i> Doanh thu</a></li>
+            <li><a href="contract.html" target="_blank" style="color: black; text-decoration: none;"><i
+                        class="fas fa-file-contract"></i> Hợp đồng</a></li>
+            <li><a href="promotion.html" style="color: black; text-decoration: none;"><i class="fas fa-tags"></i> Khuyến
+                    mãi</a></li>
+            <li><a href="notification.html" style="color: black; text-decoration: none;"><i class="fas fa-bell"></i>
+                    Thông báo</a></li>
+        </ul>
+    </aside>
 
     <!-- Main -->
     <main class="franchisee-main">

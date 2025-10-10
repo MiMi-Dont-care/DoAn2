@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
   <meta charset="UTF-8">
-  <title>Danh sách khuyến mãi - Franchisee</title>
+  <title>Thông báo - Franchisee</title>
   <link rel="stylesheet" href="../css/reset.css">
   <link rel="stylesheet" href="../css/grid.css">
   <link rel="stylesheet" href="../css/color.css">
@@ -11,7 +10,6 @@
   <link rel="stylesheet" href="../css/button.css">
   <link rel="stylesheet" href="../css/flex.css">
   <link rel="stylesheet" href="../css/franchisee.css">
-
   <style>
     /* ===========================
    USER MENU (HEADER)
@@ -115,12 +113,12 @@
 }
 
   </style>
-
-  <!-- Font Awesome -->
+    <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
 
+</head>
 <body>
   <!-- Header -->
   <header class="franchisee-header">
@@ -144,16 +142,14 @@
       <li><a href="dashboard.html" style="color: black; text-decoration: none;"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
       <li><a href="revenue.html" style="color: black; text-decoration: none;"><i class="fas fa-dollar-sign"></i> Doanh thu</a></li>
       <li><a href="contract.html" target="_blank" style="color: black; text-decoration: none;"><i class="fas fa-file-contract"></i> Hợp đồng</a></li>
-      <li class="active"><a href="promotion.html" style="color: black; text-decoration: none;"><i class="fas fa-tags"></i> Khuyến mãi</a></li>
-      <li><a href="notification.html" style="color: black; text-decoration: none;"><i class="fas fa-bell"></i> Thông báo</a></li>
+      <li><a href="promotion.html" style="color: black; text-decoration: none;"><i class="fas fa-tags"></i> Khuyến mãi</a></li>
+      <li class="active"><a href="notification.html" style="color: black; text-decoration: none;"><i class="fas fa-bell"></i> Thông báo</a></li>
     </ul>
   </aside>
 
   <!-- Main -->
   <main class="franchisee-main">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-      <h1 class="fs-2 fw-bold">Danh sách khuyến mãi</h1>
-    </div>
+    <h1 class="fs-2 fw-bold mb-3">Thông báo hệ thống</h1>
 
     <!-- Search -->
     <div class="store-search mb-3 d-flex justify-content-between align-items-center">
@@ -166,49 +162,38 @@
       <thead>
         <tr>
           <th>STT</th>
-          <th>Mã KM</th>
-          <th>Tên chương trình</th>
-          <th>Thời gian</th>
-          <th>Hình thức</th>
-          <th>Đối tượng</th>
+          <th>Tiêu đề</th>
+          <th>Nội dung</th>
+          <th>Ngày gửi</th>
           <th>Trạng thái</th>
         </tr>
       </thead>
-      <tbody id="promotionTableBody">
-        <tr>
-          <td colspan="7" class="text-center">Chưa có dữ liệu</td>
-        </tr>
+      <tbody id="notifyTableBody">
+        <tr><td colspan="5" class="text-center">Chưa có thông báo</td></tr>
       </tbody>
     </table>
 
+    <!-- Pagination -->
     <div id="pagination" class="franchisee-pagination"></div>
   </main>
 
-  <!-- JS -->
+  <!-- Script -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const tableBody = document.getElementById("promotionTableBody");
+      const tableBody = document.getElementById("notifyTableBody");
       const pagination = document.getElementById("pagination");
       const searchInput = document.getElementById("searchInput");
       const btnSearch = document.getElementById("btnSearch");
 
-      // Dummy data
-      let promotions = [
-        { promoId: "KM01", name: "Mua 1 tặng 1", startDate: "2025-10-01", endDate: "2025-10-07", type: "Giảm giá", value: "100%", scope: "Toàn bộ menu" },
-        { promoId: "KM02", name: "Giảm 20% hóa đơn", startDate: "2025-11-01", endDate: "2025-11-15", type: "Giảm %", value: "20%", scope: "Khách hàng mới" },
-        { promoId: "KM03", name: "Tặng nước ngọt", startDate: "2025-09-01", endDate: "2025-09-10", type: "Quà tặng", value: "01 lon", scope: "Hóa đơn >200k" }
+      let notifications = [
+        { id: 1, title: "Nhắc báo cáo doanh thu", content: "Vui lòng nộp báo cáo doanh thu tháng 9 trước ngày 05/10.", date: "2025-10-01", status: "Chưa đọc" },
+        { id: 2, title: "Chính sách mới", content: "Áp dụng quy định đồng bộ menu mới từ 15/10.", date: "2025-09-28", status: "Quan trọng" },
+        { id: 3, title: "Khuyến mãi tháng 10", content: "Chương trình Mua 1 tặng 1 áp dụng từ 01-07/10.", date: "2025-09-25", status: "Đã đọc" }
       ];
 
-      let filteredPromotions = promotions;
+      let filteredNotifications = notifications;
       let currentPage = 1;
       const itemsPerPage = 10;
-
-      function getStatus(promo) {
-        const today = new Date().toISOString().split("T")[0];
-        if (today < promo.startDate) return "Sắp diễn ra";
-        if (today > promo.endDate) return "Hết hạn";
-        return "Đang diễn ra";
-      }
 
       function renderTable(data, page = 1) {
         tableBody.innerHTML = "";
@@ -217,22 +202,20 @@
         const pageData = data.slice(start, end);
 
         if (pageData.length === 0) {
-          tableBody.innerHTML = `<tr><td colspan="7" class="text-center">Không có dữ liệu</td></tr>`;
+          tableBody.innerHTML = `<tr><td colspan="5" class="text-center">Không có thông báo</td></tr>`;
           return;
         }
 
-        pageData.forEach((promo, index) => {
-          const row = `
+        pageData.forEach((n, index) => {
+          tableBody.innerHTML += `
             <tr>
               <td>${start + index + 1}</td>
-              <td>${promo.promoId}</td>
-              <td>${promo.name}</td>
-              <td>${promo.startDate} → ${promo.endDate}</td>
-              <td>${promo.type} (${promo.value})</td>
-              <td>${promo.scope}</td>
-              <td><span class="status ${getStatus(promo) === "Đang diễn ra" ? "success" : (getStatus(promo) === "Sắp diễn ra" ? "warning" : "danger")}">${getStatus(promo)}</span></td>
-            </tr>`;
-          tableBody.innerHTML += row;
+              <td>${n.title}</td>
+              <td>${n.content}</td>
+              <td>${n.date}</td>
+              <td><span class="status ${n.status === "Chưa đọc" ? "success" : (n.status === "Quan trọng" ? "danger" : "warning")}">${n.status}</span></td>
+            </tr>
+          `;
         });
         renderPagination(data.length, page);
       }
@@ -240,33 +223,32 @@
       function renderPagination(totalItems, page) {
         pagination.innerHTML = "";
         const totalPages = Math.ceil(totalItems / itemsPerPage);
+        if (totalPages <= 1) return;
+
         for (let i = 1; i <= totalPages; i++) {
           const btn = document.createElement("button");
           btn.className = "btn " + (i === page ? "btn-primary" : "");
           btn.textContent = i;
-          btn.addEventListener("click", () => { currentPage = i; renderTable(filteredPromotions, currentPage); });
+          btn.addEventListener("click", () => { currentPage = i; renderTable(filteredNotifications, currentPage); });
           pagination.appendChild(btn);
         }
       }
 
-      function searchPromotions(keyword) {
+      function searchNotifications(keyword) {
         keyword = keyword.toLowerCase();
-        filteredPromotions = promotions.filter(p =>
-          p.promoId.toLowerCase().includes(keyword) ||
-          p.name.toLowerCase().includes(keyword) ||
-          p.type.toLowerCase().includes(keyword) ||
-          p.scope.toLowerCase().includes(keyword)
+        filteredNotifications = notifications.filter(n =>
+          n.title.toLowerCase().includes(keyword) ||
+          n.content.toLowerCase().includes(keyword)
         );
         currentPage = 1;
-        renderTable(filteredPromotions, currentPage);
+        renderTable(filteredNotifications, currentPage);
       }
 
-      btnSearch.addEventListener("click", () => searchPromotions(searchInput.value.trim()));
-      searchInput.addEventListener("keyup", e => { if (e.key === "Enter") searchPromotions(searchInput.value.trim()); });
+      btnSearch.addEventListener("click", () => searchNotifications(searchInput.value.trim()));
+      searchInput.addEventListener("keyup", e => { if (e.key === "Enter") searchNotifications(searchInput.value.trim()); });
 
-      renderTable(filteredPromotions, currentPage);
+      renderTable(filteredNotifications, currentPage);
     });
   </script>
 </body>
-
 </html>
